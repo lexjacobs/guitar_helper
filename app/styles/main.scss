@@ -1,0 +1,25 @@
+/*
+enter global style declarations here
+*/
+@import 'open-sans';
+@import "../utils/colorDefinitions.scss";
+
+body {
+  font-family: 'OpenSans', sans-serif;
+  background-color: #FAFAFA;
+  color: $grey;
+}
+/* modify bootstrap button */
+.btn.btn-default {
+  background-color: $green;
+  border: 0;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  width: 160px;
+  &:hover {
+    background-color: $green;
+    color: #ddd;
+  }
+}
