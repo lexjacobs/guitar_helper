@@ -1,0 +1,37 @@
+export const DEFAULT_NOTE_SET = [{
+  withSharps: 'a',
+  withFlats: 'a'
+}, {
+  withSharps: 'a#',
+  withFlats: 'bb'
+}, {
+  withSharps: 'b',
+  withFlats: 'b'
+}, {
+  withSharps: 'c',
+  withFlats: 'c'
+}, {
+  withSharps: 'c#',
+  withFlats: 'db'
+}, {
+  withSharps: 'd',
+  withFlats: 'd'
+}, {
+  withSharps: 'd#',
+  withFlats: 'eb'
+}, {
+  withSharps: 'e',
+  withFlats: 'e'
+}, {
+  withSharps: 'f',
+  withFlats: 'f'
+}, {
+  withSharps: 'f#',
+  withFlats: 'gb'
+}, {
+  withSharps: 'g',
+  withFlats: 'g'
+}, {
+  withSharps: 'g#',
+  withFlats: 'ab'
+}];
