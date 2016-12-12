@@ -20,7 +20,7 @@ export function getNumberFromNote(note, noteSet) {
   return null;
 }
 
-export function makeString(firstNote, noteSet) {
+export function makeStringFromNumber(firstNote, noteSet) {
   var result = [];
   for (var i = 0; i < noteSet.length; i++) {
     result.push(noteSet[(i + firstNote) % noteSet.length]);
@@ -28,11 +28,24 @@ export function makeString(firstNote, noteSet) {
   return result;
 }
 
-export function stringMaker(options) {
-  if (options === undefined) console.log('Missing options');
+export function makeStringFromLetter(firstNote, noteSet) {
+  var result = [];
+  firstNote = getNumberFromNote(firstNote, noteSet);
+  for (var i = 0; i < noteSet.length; i++) {
+    result.push(noteSet[(i + firstNote) % noteSet.length]);
+  }
+  return result;
+}
 
-  let stringNotes = makeString(options.stringStart, DEFAULT_NOTE_SET);
-
+export function stringMaker(options, noteSet) {
+  if (options === undefined) console.error('Missing options');
+  let stringNotes;
+  if (typeof options.stringStart === 'string') {
+    stringNotes = makeStringFromLetter(options.stringStart, noteSet);
+  }
+  if (typeof options.stringStart === 'number') {
+    stringNotes = makeStringFromNumber(options.stringStart, noteSet);
+  }
   return {
     stringNotes
   };
@@ -42,14 +55,12 @@ export function stringMaker(options) {
 StringMaker({stringStart: 0}) produces: { stringNotes:
    [ { withSharps: 'a', withFlats: 'a' },
      { withSharps: 'a#', withFlats: 'bb' },
-     { withSharps: 'b', withFlats: 'b' },
-     { withSharps: 'c', withFlats: 'c' },
-     { withSharps: 'c#', withFlats: 'db' },
-     { withSharps: 'd', withFlats: 'd' },
-     { withSharps: 'd#', withFlats: 'eb' },
-     { withSharps: 'e', withFlats: 'e' },
-     { withSharps: 'f', withFlats: 'f' },
-     { withSharps: 'f#', withFlats: 'gb' },
-     { withSharps: 'g', withFlats: 'g' },
+      ...
      { withSharps: 'g#', withFlats: 'ab' } ] }
+
+StringMaker({stringStart: 'c'}) produces: { stringNotes:
+  [ { withSharps: 'c', withFlats: 'c' },
+    { withSharps: 'c#', withFlats: 'db' },
+      ...
+    { withSharps: 'b', withFlats: 'b' } ] }
  */
