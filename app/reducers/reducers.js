@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
 // default state must be included
-export function exampleState(state = {count: 0}, action) {
+export function neckState(state = {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e']}, action) {
   switch (action.type) {
-  case 'EXAMPLE_ACTION_INCREASE':
+  case 'MAKE_NECK':
 
     // pass-through all other state, and increment count
     return {
       ...state,
-      count: state.count + 1
+      neckNotes: action.notes
     };
 
   // must return default case for redux
@@ -19,5 +19,5 @@ export function exampleState(state = {count: 0}, action) {
 
 // provides function for combining multiple producers
 export const rootReducer = combineReducers({
-  exampleState
+  neckState
 });

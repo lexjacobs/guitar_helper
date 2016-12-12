@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import {rootReducer} from '../reducers/reducers.js';
 import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
 import {persistStore, autoRehydrate} from 'redux-persist';
-import {Example} from '../containers/Example/ExampleContainer.jsx';
+import {Neck} from '../containers/Neck/NeckContainer.jsx';
 
 let store;
 if (process.env.NODE_ENV === 'development') {
@@ -23,8 +23,8 @@ if (process.env.NODE_ENV === 'development') {
 
 // record a state of white listed reducers to localStorage
 persistStore(store, {
-  whitelist: ['exampleState'],
-  keyPrefix: 'boilerplate-uncle:'
+  whitelist: ['neckState'],
+  keyPrefix: 'guitar-helper:'
 });
 
 store.subscribe(() => {
@@ -39,8 +39,8 @@ export const routes = (
     <Router history={hashHistory}>
       <Route path="/" component={NavBar}>
         <IndexRedirect to="/main"/>
-        <Route path="/main" component={Example}/>
-        <Route path="/alternate" component={Example}/>
+        <Route path="/main" component={Neck}/>
+        <Route path="/alternate" component={Neck}/>
       </Route>
     </Router>
   </Provider>

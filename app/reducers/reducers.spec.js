@@ -6,15 +6,15 @@ import {expect} from 'chai';
 import * as reducer from './reducers.js';
 
 describe('testing reducers', () => {
-  it('exampleState reducer passes through unknown action', () => {
-    expect(reducer.exampleState(undefined, {type: ''})).to.deep.equal({count: 0});
+  it('neckState reducer passes through unknown action', () => {
+    expect(reducer.neckState(undefined, {type: ''})).to.deep.equal( {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e']});
   });
-  it('exampleState sets and increments default state', () => {
-    expect(reducer.exampleState(undefined, {type: 'EXAMPLE_ACTION_INCREASE'})).to.deep.equal({count: 1});
-    expect(reducer.exampleState({count: 1}, {type: 'EXAMPLE_ACTION_INCREASE'})).to.deep.equal({count: 2});
-    expect(reducer.exampleState({count: 2}, {type: 'EXAMPLE_ACTION_INCREASE'})).to.deep.equal({count: 3});
+  it('neckState sets notes appropriately', () => {
+    expect(reducer.neckState(undefined, {type: 'MAKE_NECK', notes: ['e', 'a', 'd', 'g', 'b', 'e']})).to.deep.equal({neckNotes: ['e', 'a', 'd', 'g', 'b', 'e']});
+    expect(reducer.neckState(undefined, {type: 'MAKE_NECK', notes: ['e']})).to.deep.equal({neckNotes: ['e']});
+    expect(reducer.neckState(undefined, {type: 'MAKE_NECK', notes: [0, 1, 2]})).to.deep.equal({neckNotes: [0, 1, 2]});
   });
-  it('exampleState sets and increments existing state', () => {
-    expect(reducer.exampleState({count: 41}, {type: 'EXAMPLE_ACTION_INCREASE'})).to.deep.equal({count: 42});
+  it('neckState sets and increments existing state', () => {
+    expect(reducer.neckState({neckNotes: ['a', 'b', 'c']}, {type: 'MAKE_NECK', notes: ['d', 'e', 'f']})).to.deep.equal({neckNotes: ['d', 'e', 'f']});
   });
 });

@@ -5,7 +5,7 @@ global describe it
 import configureMockStore from 'redux-mock-store';
 import React from 'react';
 import {expect} from 'chai';
-import {Example} from './ExampleContainer.jsx';
+import {Neck} from './NeckContainer.jsx';
 import {Provider} from 'react-redux';
 import {mount} from 'enzyme';
 
@@ -21,11 +21,11 @@ describe('testing component', () => {
 
   const wrapper = mount(
     <Provider store={store}>
-      <Example/>
+      <Neck/>
     </Provider>
   );
 
   it('renders a redux wrapped component', () => {
-    expect(wrapper.find(Example).length).to.equal(1);
+    expect(wrapper.find(Neck).length).to.equal(1);
   });
 });

@@ -37,8 +37,13 @@ export function makeStringFromLetter(firstNote, noteSet) {
   return result;
 }
 
-export function stringMaker(options, noteSet) {
-  if (options === undefined) console.error('Missing options');
+export function revealNotes(noteSet = [], noteFlavor) {
+  // must explicitly declare 'withFlats'
+  noteFlavor = noteFlavor || 'withSharps';
+  return noteSet.map((note) => note[noteFlavor]);
+}
+
+export function stringMaker(options = {}, noteSet) {
   let stringNotes;
   if (typeof options.stringStart === 'string') {
     stringNotes = makeStringFromLetter(options.stringStart, noteSet);
@@ -49,6 +54,11 @@ export function stringMaker(options, noteSet) {
   return {
     stringNotes
   };
+}
+
+export function neckMaker(startNotes = [], noteSet) {
+  noteSet = noteSet || DEFAULT_NOTE_SET;
+  return startNotes.map((note) => stringMaker({stringStart: note}, noteSet));
 }
 
 /*

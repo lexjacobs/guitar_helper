@@ -1,7 +1,8 @@
-const EXAMPLE_ACTION_INCREASE = 'EXAMPLE_ACTION_INCREASE';
+const MAKE_NECK = 'MAKE_NECK';
 
-export function exampleActionIncrease() {
+export function makeNeck(startingNotes) {
   return {
-    type: EXAMPLE_ACTION_INCREASE
+    type: MAKE_NECK,
+    notes: startingNotes
   };
 }

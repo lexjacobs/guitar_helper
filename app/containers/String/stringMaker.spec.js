@@ -189,4 +189,26 @@ describe('a string contains the expected properties', () => {
 
   });
 
+  it('can reveal the notes of a string', () => {
+    let testNoteSet = [{withFlats: 'e', withSharps: 'e'}, {withFlats: 'f', withSharps: 'f'}];
+    // without specifying noteFlavor
+    let testResult = methods.revealNotes(testNoteSet);
+    expect(testResult).to.deep.equal(['e', 'f']);
+    // with flats specified
+    testResult = methods.revealNotes(testNoteSet, 'withFlats');
+    expect(testResult).to.deep.equal(['e', 'f']);
+    // with sharps specified
+    testResult = methods.revealNotes(testNoteSet, 'withSharps');
+    expect(testResult).to.deep.equal(['e', 'f']);
+  });
+
+  it('can take an input of strings and create a neck', () => {
+    let testNotes = ['e', 'a', 'd'];
+    let testNeck = methods.neckMaker(testNotes, DEFAULT_NOTE_SET);
+    expect(testNeck[0].stringNotes[0].withFlats).to.equal('e');
+    expect(testNeck[1].stringNotes[0].withFlats).to.equal('a');
+    expect(testNeck[2].stringNotes[0].withFlats).to.equal('d');
+    expect(testNeck[3]).to.equal(undefined);
+  });
+
 });
