@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import {rootReducer} from '../reducers/reducers.js';
 import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
 import {persistStore, autoRehydrate} from 'redux-persist';
-import {Neck} from '../containers/Neck/NeckContainer.jsx';
+import {Neck} from '../components/Neck/NeckContainer.jsx';
 
 let store;
 if (process.env.NODE_ENV === 'development') {
