@@ -18,9 +18,6 @@ var NavBar = React.createClass({
           <li>
             <NavLink className="nav-link" to="/main">Main</NavLink>
           </li>
-          <li>
-            <NavLink className="nav-link" to="/alternate">Alternate</NavLink>
-          </li>
         </ul>
       </nav>
 

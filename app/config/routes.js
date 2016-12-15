@@ -40,7 +40,6 @@ export const routes = (
       <Route path="/" component={NavBar}>
         <IndexRedirect to="/main"/>
         <Route path="/main" component={Neck}/>
-        <Route path="/alternate" component={Neck}/>
       </Route>
     </Router>
   </Provider>

@@ -35,3 +35,5 @@ export const DEFAULT_NOTE_SET = [{
   withSharps: 'g#',
   withFlats: 'ab'
 }];
+
+// ♭♯

@@ -11,4 +11,12 @@ describe('testing action creators', () => {
     expect(actions.makeNeck(testNotes)).to.deep.equal({type: 'MAKE_NECK', notes: testNotes});
   });
 
+  it('handles the parameters for setFlavor properly',  () => {
+    let testFlavorFlats = 'b';
+    expect(actions.setFlavor(testFlavorFlats)).to.deep.equal({type: 'SET_FLAVOR', flavor: testFlavorFlats});
+
+    let testFlavorSharps = '#';
+    expect(actions.setFlavor(testFlavorSharps)).to.deep.equal({type: 'SET_FLAVOR', flavor: testFlavorSharps});
+  });
+
 });
