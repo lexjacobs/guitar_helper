@@ -1,3 +1,7 @@
+/* global require */
+var _ = require('lodash');
+
+// ♭♯
 export const DEFAULT_NOTE_SET = [{
   withSharps: 'a',
   withFlats: 'a'
@@ -36,4 +40,26 @@ export const DEFAULT_NOTE_SET = [{
   withFlats: 'ab'
 }];
 
-// ♭♯
+export const SCALE_MAPPING = {
+  standard: ['e', 'a', 'd', 'g', 'b', 'e'],
+  'drop d': ['d', 'a', 'd', 'g', 'b', 'e'],
+  dadgad: ['d', 'a', 'd', 'g', 'a', 'd'],
+  daddad: ['d', 'a', 'd', 'd', 'a', 'd'],
+  'all fourths': ['e', 'a', 'd', 'g', 'c', 'f'],
+  mandoguitar: ['c', 'g', 'd', 'a', 'e', 'b'],
+  'open a': ['e', 'a', 'c#', 'e', 'a', 'e'],
+  'open a slide': ['e', 'a', 'e', 'a', 'c#', 'e'],
+  'open b': ['b', 'f#', 'b', 'f#', 'b', 'd#'],
+  ostrich: ['e', 'e', 'e', 'e', 'e', 'e'],
+  '7 string': ['b', 'e', 'a', 'd', 'g', 'b', 'e'],
+  '-': [],
+};
+
+export function scaleNameFromNotes (notes, mapping) {
+  for (var scale in mapping) {
+    if (_.isEqual(mapping[scale], notes)) {
+      return scale;
+    }
+  }
+  return '-';
+}

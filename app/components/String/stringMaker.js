@@ -16,7 +16,7 @@ export function getNumberFromNote(note, noteSet) {
       }
     }
   }
-  console.log('note not in scale');
+  console.log('note not in scale: "', note, '"');
   return null;
 }
 
@@ -56,8 +56,7 @@ export function stringMaker(options = {}, noteSet) {
   };
 }
 
-export function neckMaker(startNotes = [], noteSet) {
-  noteSet = noteSet || DEFAULT_NOTE_SET;
+export function neckMaker(startNotes, noteSet=DEFAULT_NOTE_SET) {
   return startNotes.map((note) => stringMaker({stringStart: note}, noteSet));
 }
 

@@ -1,16 +1,16 @@
 /*global require*/
 var React = require('react');
-// var _ = require('lodash');
 import {Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/actions.js';
 import * as methods from '../String/stringMaker.js';
 import {StringView} from '../String/stringView.js';
+import {TuningChooser} from '../Tuning/tuningChooser.js';
 
-// requiring modular css definition is as easy as requiring the file!
+// requiring modular css definition
 require('./style.scss');
 
-// example stateless component made stateful through redux connect function
+// stateless component made stateful through redux connect function
 const _Neck = ({neckNotes, neckFlavor, noteSet, dispatch}) => {
 
   let neck = methods.neckMaker(neckNotes, noteSet);
@@ -22,8 +22,9 @@ const _Neck = ({neckNotes, neckFlavor, noteSet, dispatch}) => {
   return (
 
     <div className={'mainContainer'}>
-
+      <TuningChooser actions={actions} dispatch={dispatch} neckNotes={neckNotes}/>
       <Button onClick={() => dispatch(actions.makeNeck(['d', 'a', 'd', 'g', 'a', 'd']))}>DADGAD</Button>
+      <Button onClick={() => dispatch(actions.makeNeck(['c', 'a', 'd', 'g', 'a', 'd']))}>CADGAD</Button>
       <Button onClick={() => dispatch(actions.makeNeck(['e', 'a', 'd', 'g', 'b', 'e']))}>Standard Tuning</Button>
       <Button onClick={() => dispatch(actions.setFlavor('b'))}>Flat</Button>
       <Button onClick={() => dispatch(actions.setFlavor('#'))}>Sharp</Button>
