@@ -6,6 +6,7 @@ import * as actions from '../../actions/actions.js';
 import * as methods from '../String/stringMaker.js';
 import {StringView} from '../String/stringView.js';
 import {TuningChooser} from '../Tuning/tuningChooser.js';
+import {TuningAdjuster} from '../Tuning/tuningAdjuster.js';
 
 // requiring modular css definition
 require('./style.scss');
@@ -23,6 +24,7 @@ const _Neck = ({neckNotes, neckFlavor, noteSet, dispatch}) => {
 
     <div className={'mainContainer'}>
       <TuningChooser actions={actions} dispatch={dispatch} neckNotes={neckNotes}/>
+      <TuningAdjuster actions={actions} dispatch={dispatch} />
       <Button onClick={() => dispatch(actions.makeNeck(['d', 'a', 'd', 'g', 'a', 'd']))}>DADGAD</Button>
       <Button onClick={() => dispatch(actions.makeNeck(['c', 'a', 'd', 'g', 'a', 'd']))}>CADGAD</Button>
       <Button onClick={() => dispatch(actions.makeNeck(['e', 'a', 'd', 'g', 'b', 'e']))}>Standard Tuning</Button>

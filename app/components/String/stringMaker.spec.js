@@ -186,6 +186,7 @@ describe('a string contains the expected properties', () => {
     }, TEST_NOTE_SET);
 
     expect(testString.stringNotes[0]).to.deep.equal({withSharps: 'd#', withFlats: 'eb'});
+    expect(testString.stringNotes[TEST_NOTE_SET.length-1]).to.deep.equal({withSharps: 'd', withFlats: 'd'});
 
   });
 
