@@ -15,17 +15,13 @@ require('./style.scss');
 // stateless component made stateful through redux connect function
 const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}) => {
 
+  var scaleNotes = methods.makeScaleFromRootAndIntervals(scaleStart, SCALE_SET[scaleName], noteSet);
+
   let neck = methods.neckMaker(neckNotes, noteSet);
   let strings = neck.map((str) => str.stringNotes);
   let testStrings = strings.map((str, i) => {
-    return <StringView key={i} string={methods.revealNotes(str, neckFlavor)} />;
+    return <StringView key={i} string={methods.revealNotes(str, neckFlavor)} scaleNotes={scaleNotes} />;
   });
-
-  var scaleNotes = methods.makeScaleFromRootAndIntervals(scaleStart, SCALE_SET[scaleName], noteSet);
-
-  for(var notes in scaleNotes){
-    console.log(scaleNotes[notes]);
-  }
 
   let StringAdjusters = neckNotes.map((string, i) => <StringAdjuster actions={actions} dispatch={dispatch} key={i} stringNumber={i} />);
 

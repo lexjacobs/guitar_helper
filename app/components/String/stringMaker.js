@@ -55,6 +55,17 @@ export function makeStringFromLetter(firstNote, noteSet) {
   return result;
 }
 
+export function noteInSet(note, set) {
+  for (var i = 0; i < set.length; i++) {
+    for (var flavor in set[i]) {
+      if (set[i][flavor] === note) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 export function revealNotes(noteSet = [], noteFlavor) {
   // must explicitly declare 'withFlats'
   noteFlavor = noteFlavor || 'withSharps';

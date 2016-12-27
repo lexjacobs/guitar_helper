@@ -211,7 +211,12 @@ describe('a string contains the expected properties', () => {
     expect(testNeck[2].stringNotes[0].withFlats).to.equal('d');
     expect(testNeck[3]).to.equal(undefined);
   });
-
+  it('can check to see if a note is in a set', () => {
+    expect(methods.noteInSet('a', [{something: 'a', somethingElse: 'a#'}])).to.be.true;
+    expect(methods.noteInSet('a#', [{something: 'a', somethingElse: 'a#'}])).to.be.true;
+    expect(methods.noteInSet('a#', [{something: 'ichabod', somethingElse: 'crane'}])).to.be.false;
+    expect(methods.noteInSet('ichabod crane', [{something: 'a', somethingElse: 'a#'}])).to.be.false;
+  });
 });
 describe('scales can be constructed from starting parameters', () => {
   it('makes a scale from or root note, intervals, and a note set', () => {
