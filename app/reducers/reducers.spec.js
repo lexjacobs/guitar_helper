@@ -100,4 +100,147 @@ describe('testing reducers', () => {
       neckFlavor: 'withSharps',
     });
   });
+  it('neckState changes the tuning of individual strings accordingly', () => {
+    // stringNumber designated
+    var answerKey = {
+      0: ['a#', 'a', 'a'],
+      1: ['a', 'a#', 'a'],
+      2: ['a', 'a', 'a#']
+    };
+    for (var i = 0; i < 3; i++) {
+      expect(reducer.neckState({neckNotes: ['a', 'a', 'a'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, {
+        type: 'ADJUST_STRING',
+        stringNumber: i,
+        direction: 'up'
+      })).to.deep.equal({
+        neckNotes: answerKey[i],
+        neckFlavor: 'withSharps',
+        noteSet: DEFAULT_NOTE_SET
+      });
+    }
+  });
+  it('neckState changes the tuning of individual strings and can go over the edge', () => {
+    var answerKey = {
+      0: ['g#', 'a', 'a'],
+      1: ['a', 'g#', 'a'],
+      2: ['a', 'a', 'g#']
+    };
+    for (var i = 0; i < 3; i++) {
+      expect(reducer.neckState({neckNotes: ['a', 'a', 'a'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, {
+        type: 'ADJUST_STRING',
+        stringNumber: i,
+        direction: 'down'
+      })).to.deep.equal({
+        neckNotes: answerKey[i],
+        neckFlavor: 'withSharps',
+        noteSet: DEFAULT_NOTE_SET
+      });
+    }
+    answerKey = {
+      0: ['a', 'g#', 'g#'],
+      1: ['g#', 'a', 'g#'],
+      2: ['g#', 'g#', 'a']
+    };
+    for (i = 0; i < 3; i++) {
+      // stringNumber designated
+      expect(reducer.neckState({neckNotes: ['g#', 'g#', 'g#'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, {
+        type: 'ADJUST_STRING',
+        stringNumber: i,
+        direction: 'up'
+      })).to.deep.equal({
+        neckNotes: answerKey[i],
+        neckFlavor: 'withSharps',
+        noteSet: DEFAULT_NOTE_SET
+      });
+    }
+  });
+  it('neckState changes the tuning of individual strings and doesn\'t care how many repetitions are made', () => {
+    var directionKey = {
+      0: 'down',
+      1: 'up',
+      2: 'down',
+    };
+    for (var i = 0; i < 3; i++) {
+
+      var testState = {neckNotes: ['a', 'a', 'a'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET};
+      var testReducer = {
+        type: 'ADJUST_STRING',
+        stringNumber: i,
+        direction: directionKey[i]
+      };
+      // does multiples of 12s
+      for (var j = 0; j < (120 * (i+1)); j++) {
+        testState = reducer.neckState(testState, testReducer);
+      }
+
+      expect(testState).to.deep.equal({
+        neckNotes: ['a', 'a', 'a'],
+        neckFlavor: 'withSharps',
+        noteSet: DEFAULT_NOTE_SET
+      });
+    }
+  });
+  it('neckState changes the tuning of the entire neck and doesn\'t care how many repetitions are made', () => {
+    var directionKey = {
+      0: 'down',
+      1: 'up',
+      2: 'down',
+    };
+    for (var i = 0; i < 3; i++) {
+      // no stringNumber designated
+      var testState = {neckNotes: ['a', 'a', 'a'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET};
+      var testReducer = {
+        type: 'ADJUST_STRING',
+        direction: directionKey[i]
+      };
+      // does multiples of 12s
+      for (var j = 0; j < (120 * (i+1)); j++) {
+        testState = reducer.neckState(testState, testReducer);
+      }
+
+      expect(testState).to.deep.equal({
+        neckNotes: ['a', 'a', 'a'],
+        neckFlavor: 'withSharps',
+        noteSet: DEFAULT_NOTE_SET
+      });
+    }
+  });
+  it('neckState changes the tuning of the entire neck accordingly', () => {
+    // no stringNumber designated
+    expect(reducer.neckState({neckNotes: ['a', 'a', 'a'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, {
+      type: 'ADJUST_STRING',
+      direction: 'up'
+    })).to.deep.equal({
+      neckNotes: ['a#', 'a#', 'a#'],
+      neckFlavor: 'withSharps',
+      noteSet: DEFAULT_NOTE_SET
+    });
+    // no stringNumber designated
+    expect(reducer.neckState({neckNotes: ['g#', 'g#', 'g#'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, {
+      type: 'ADJUST_STRING',
+      direction: 'up'
+    })).to.deep.equal({
+      neckNotes: ['a', 'a', 'a'],
+      neckFlavor: 'withSharps',
+      noteSet: DEFAULT_NOTE_SET
+    });
+    // no stringNumber designated
+    expect(reducer.neckState({neckNotes: ['g#', 'g#', 'g#'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, {
+      type: 'ADJUST_STRING',
+      direction: 'down'
+    })).to.deep.equal({
+      neckNotes: ['g', 'g', 'g'],
+      neckFlavor: 'withSharps',
+      noteSet: DEFAULT_NOTE_SET
+    });
+    // no stringNumber designated
+    expect(reducer.neckState({neckNotes: ['a', 'a', 'a'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, {
+      type: 'ADJUST_STRING',
+      direction: 'down'
+    })).to.deep.equal({
+      neckNotes: ['g#', 'g#', 'g#'],
+      neckFlavor: 'withSharps',
+      noteSet: DEFAULT_NOTE_SET
+    });
+  });
 });
