@@ -9,6 +9,11 @@ export function getNoteFromNumber(num, noteSet) {
 }
 
 export function getNumberFromNote(note, noteSet) {
+
+  if (typeof note === 'object') {
+    note = note.withSharps;
+  }
+
   for (var i = 0; i < noteSet.length; i++) {
     for (var flavor in noteSet[i]) {
       if (noteSet[i][flavor] === note) {
@@ -16,8 +21,21 @@ export function getNumberFromNote(note, noteSet) {
       }
     }
   }
-  console.log('note not in scale: "', note, '"');
+  console.log('note not in scale: ', note);
   return null;
+}
+
+export function makeScaleFromRootAndIntervals(root='c', intervals=[1], noteSet=DEFAULT_NOTE_SET) {
+  var start = [getNoteFromNumber(getNumberFromNote(root, noteSet), noteSet)];
+  return intervals.reduce((prev, cur) => {
+    let previousNote = getNumberFromNote(prev[(prev.length-1)], noteSet);
+    let result = previousNote + cur;
+    while (result >= noteSet.length) {
+      result -= noteSet.length;
+    }
+    prev.push(getNoteFromNumber(result, noteSet));
+    return prev;
+  }, start);
 }
 
 export function makeStringFromNumber(firstNote, noteSet) {

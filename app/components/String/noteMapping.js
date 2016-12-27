@@ -110,6 +110,7 @@ export function scaleNameFromNotes (notes, mapping) {
 }
 
 export const SCALE_SET = {
-  major: [2, 2, 1, 2, 2, 2, 1],
-  minor: [2, 1, 2, 2, 1, 2, 2]
+  major: [2, 2, 1, 2, 2, 2],
+  minor: [2, 1, 2, 2, 1, 2],
+  'whole tone': [2, 2, 2, 2, 2]
 };

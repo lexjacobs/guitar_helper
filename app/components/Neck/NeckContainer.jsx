@@ -7,6 +7,7 @@ import * as methods from '../String/stringMaker.js';
 import {StringView} from '../String/stringView.js';
 import {ScaleChooser, ScaleStartChooser, TuningChooser} from '../Tuning/tuningChooser.js';
 import {StringAdjuster, TuningAdjuster } from '../Tuning/tuningAdjuster.js';
+import {SCALE_SET} from '../String/noteMapping.js';
 
 // requiring modular css definition
 require('./style.scss');
@@ -19,6 +20,12 @@ const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}
   let testStrings = strings.map((str, i) => {
     return <StringView key={i} string={methods.revealNotes(str, neckFlavor)} />;
   });
+
+  var scaleNotes = methods.makeScaleFromRootAndIntervals(scaleStart, SCALE_SET[scaleName], noteSet);
+
+  for(var notes in scaleNotes){
+    console.log(scaleNotes[notes]);
+  }
 
   let StringAdjusters = neckNotes.map((string, i) => <StringAdjuster actions={actions} dispatch={dispatch} key={i} stringNumber={i} />);
 

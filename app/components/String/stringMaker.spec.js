@@ -213,3 +213,101 @@ describe('a string contains the expected properties', () => {
   });
 
 });
+describe('scales can be constructed from starting parameters', () => {
+  it('makes a scale from or root note, intervals, and a note set', () => {
+    let testRoot = 'a';
+    let testIntervals = [1, 2];
+    let testNoteSet = [{
+      withSharps: 'a',
+      withFlats: 'a'
+    }, {
+      withSharps: 'a#',
+      withFlats: 'bb'
+    }, {
+      withSharps: 'b',
+      withFlats: 'b'
+    }, {
+      withSharps: 'c',
+      withFlats: 'c'
+    }];
+
+    expect(methods.makeScaleFromRootAndIntervals(testRoot, testIntervals, testNoteSet)).to.deep.equal([{
+      withSharps: 'a',
+      withFlats: 'a'
+    }, {
+      withSharps: 'a#',
+      withFlats: 'bb'
+    }, {
+      withSharps: 'c',
+      withFlats: 'c'
+    }]);
+
+  });
+  it('makes a scale from or root/intervals/note set, and goes over the edge', () => {
+    let testRoot = 'b';
+    let testIntervals = [1, 2];
+    let testNoteSet = [{
+      withSharps: 'a',
+      withFlats: 'a'
+    }, {
+      withSharps: 'a#',
+      withFlats: 'bb'
+    }, {
+      withSharps: 'b',
+      withFlats: 'b'
+    }, {
+      withSharps: 'c',
+      withFlats: 'c'
+    }];
+
+    expect(methods.makeScaleFromRootAndIntervals(testRoot, testIntervals, testNoteSet)).to.deep.equal([{
+      withSharps: 'b',
+      withFlats: 'b'
+    }, {
+      withSharps: 'c',
+      withFlats: 'c'
+    }, {
+      withSharps: 'a#',
+      withFlats: 'bb'
+    }]);
+
+  });
+  it('makes a scale and will keep looping around and around', () => {
+    let testRoot = 'b';
+    let testIntervals = [1, 1, 1, 1, 1];
+    let testNoteSet = [{
+      withSharps: 'a',
+      withFlats: 'a'
+    }, {
+      withSharps: 'a#',
+      withFlats: 'bb'
+    }, {
+      withSharps: 'b',
+      withFlats: 'b'
+    }, {
+      withSharps: 'c',
+      withFlats: 'c'
+    }];
+
+    expect(methods.makeScaleFromRootAndIntervals(testRoot, testIntervals, testNoteSet)).to.deep.equal([{
+      withSharps: 'b',
+      withFlats: 'b'
+    }, {
+      withSharps: 'c',
+      withFlats: 'c'
+    }, {
+      withSharps: 'a',
+      withFlats: 'a'
+    }, {
+      withSharps: 'a#',
+      withFlats: 'bb'
+    }, {
+      withSharps: 'b',
+      withFlats: 'b'
+    }, {
+      withSharps: 'c',
+      withFlats: 'c'
+    }]);
+
+  });
+});
