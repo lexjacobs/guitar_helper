@@ -3,7 +3,7 @@ import * as methods from '../components/String/stringMaker.js';
 import {DEFAULT_NOTE_SET} from '../components/String/noteMapping.js';
 
 // default state must be included
-export function neckState(state = {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET}, action) {
+export function neckState(state = {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET, scaleName: 'minor', scaleStart: 'c'}, action) {
   switch (action.type) {
   case 'ADJUST_STRING':
 
@@ -48,6 +48,24 @@ export function neckState(state = {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'], ne
       ...state,
       neckFlavor: flavorKey[action.flavor]
     };
+  case 'SET_SCALE':
+
+    if (action.adjustment === 'scaleName') {
+      return {
+        ...state,
+        scaleName: action.nameOrScale
+      };
+    }
+
+    if (action.adjustment === 'scaleStart') {
+      return {
+        ...state,
+        scaleStart: action.nameOrScale
+      };
+    }
+
+    return state;
+
   // must return default case for redux
   default:
     return state;

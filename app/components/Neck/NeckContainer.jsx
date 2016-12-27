@@ -5,14 +5,14 @@ import {connect} from 'react-redux';
 import * as actions from '../../actions/actions.js';
 import * as methods from '../String/stringMaker.js';
 import {StringView} from '../String/stringView.js';
-import {TuningChooser} from '../Tuning/tuningChooser.js';
-import {TuningAdjuster, StringAdjuster} from '../Tuning/tuningAdjuster.js';
+import {ScaleChooser, ScaleStartChooser, TuningChooser} from '../Tuning/tuningChooser.js';
+import {StringAdjuster, TuningAdjuster } from '../Tuning/tuningAdjuster.js';
 
 // requiring modular css definition
 require('./style.scss');
 
 // stateless component made stateful through redux connect function
-const _Neck = ({neckNotes, neckFlavor, noteSet, dispatch}) => {
+const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}) => {
 
   let neck = methods.neckMaker(neckNotes, noteSet);
   let strings = neck.map((str) => str.stringNotes);
@@ -25,6 +25,8 @@ const _Neck = ({neckNotes, neckFlavor, noteSet, dispatch}) => {
   return (
 
     <div className={'mainContainer'}>
+      <ScaleStartChooser actions={actions} dispatch={dispatch} scaleName={scaleName} scaleStart={scaleStart}  neckFlavor={neckFlavor} />
+      <ScaleChooser actions={actions} dispatch={dispatch} scaleName={scaleName}/>
       <TuningChooser actions={actions} dispatch={dispatch} neckNotes={neckNotes}/>
       <TuningAdjuster actions={actions} dispatch={dispatch} />
       {StringAdjusters}

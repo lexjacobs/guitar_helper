@@ -15,7 +15,9 @@ describe('testing reducers', () => {
     })).to.deep.equal({
       neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'],
       neckFlavor: 'withSharps',
-      noteSet: DEFAULT_NOTE_SET
+      noteSet: DEFAULT_NOTE_SET,
+      scaleName: 'minor',
+      scaleStart: 'c'
     });
   });
   it('neckState sets notes appropriately', () => {
@@ -25,7 +27,9 @@ describe('testing reducers', () => {
     })).to.deep.equal({
       neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'],
       neckFlavor: 'withSharps',
-      noteSet: DEFAULT_NOTE_SET
+      noteSet: DEFAULT_NOTE_SET,
+      scaleName: 'minor',
+      scaleStart: 'c'
     });
     expect(reducer.neckState(undefined, {
       type: 'MAKE_NECK',
@@ -33,7 +37,9 @@ describe('testing reducers', () => {
     })).to.deep.equal({
       neckNotes: ['e'],
       neckFlavor: 'withSharps',
-      noteSet: DEFAULT_NOTE_SET
+      noteSet: DEFAULT_NOTE_SET,
+      scaleName: 'minor',
+      scaleStart: 'c'
     });
     expect(reducer.neckState(undefined, {
       type: 'MAKE_NECK',
@@ -41,7 +47,9 @@ describe('testing reducers', () => {
     })).to.deep.equal({
       neckNotes: [0, 1, 2],
       neckFlavor: 'withSharps',
-      noteSet: DEFAULT_NOTE_SET
+      noteSet: DEFAULT_NOTE_SET,
+      scaleName: 'minor',
+      scaleStart: 'c'
     });
   });
   it('neckState sets and increments existing state', () => {
@@ -61,7 +69,9 @@ describe('testing reducers', () => {
     })).to.deep.equal({
       neckFlavor: 'withSharps',
       neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'],
-      noteSet: DEFAULT_NOTE_SET
+      noteSet: DEFAULT_NOTE_SET,
+      scaleName: 'minor',
+      scaleStart: 'c'
     });
   });
   it('neckState sets and updates neck flavor appropriately', () => {
@@ -71,7 +81,9 @@ describe('testing reducers', () => {
     })).to.deep.equal({
       neckFlavor: 'withFlats',
       neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'],
-      noteSet: DEFAULT_NOTE_SET
+      noteSet: DEFAULT_NOTE_SET,
+      scaleName: 'minor',
+      scaleStart: 'c'
     });
   });
   it('neckState sets and updates neck flavor appropriately', () => {
