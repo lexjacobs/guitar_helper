@@ -1,11 +1,12 @@
-const ADJUST_ENTIRE_NECK = 'ADJUST_ENTIRE_NECK';
+const ADJUST_STRING = 'ADJUST_STRING';
 const MAKE_NECK = 'MAKE_NECK';
 const SET_FLAVOR = 'SET_FLAVOR';
 
-export function adjustEntireNeck(direction) {
+export function adjustString(direction, stringNumber) {
   return {
-    type: ADJUST_ENTIRE_NECK,
-    direction
+    type: ADJUST_STRING,
+    direction,
+    stringNumber
   };
 }
 
