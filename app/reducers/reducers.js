@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import * as methods from '../components/String/stringMaker.js';
-import {DEFAULT_NOTE_SET, DEFAULT_SCALE_NOTES} from '../components/String/noteMapping.js';
+import {DEFAULT_NOTE_SET} from '../components/String/noteMapping.js';
 
 // default state must be included
-export function neckState(state = {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET, scaleName: 'major', scaleNotes: DEFAULT_SCALE_NOTES,  scaleStart: 'c'}, action) {
+export function neckState(state = {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'], neckFlavor: 'withSharps', noteSet: DEFAULT_NOTE_SET, scaleName: 'major',  scaleStart: 'c'}, action) {
   switch (action.type) {
   case 'ADJUST_STRING':
 

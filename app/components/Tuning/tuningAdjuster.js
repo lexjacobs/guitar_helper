@@ -5,15 +5,15 @@ import {Button} from 'react-bootstrap';
 // adjust single string, includes parameter of string number
 export const StringAdjuster = function(props){
   return (
-    <div>
+    <span>
         <Button onClick={() => {props.dispatch(props.actions.adjustString('up', props.stringNumber));}}>String {props.stringNumber + 1} Up</Button>{' '}
         <Button onClick={() => {props.dispatch(props.actions.adjustString('down', props.stringNumber));}}>String {props.stringNumber + 1} Down</Button>
-    </div>
+    </span>
   );
 };
 
 // adjust entire neck, second parameter undefined
-export const TuningAdjuster = function(props){
+export const NeckTuningAdjuster = function(props){
   return (
     <div>
         <Button onClick={() => {props.dispatch(props.actions.adjustString('up'));}}>Neck Up</Button>{' '}

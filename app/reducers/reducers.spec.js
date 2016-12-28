@@ -8,37 +8,6 @@ import {
 import * as reducer from './reducers.js';
 import {DEFAULT_NOTE_SET} from '../components/String/noteMapping.js';
 
-var scaleNotes = [
-  {
-    'withFlats': 'c',
-    'withSharps': 'c'
-  },
-  {
-    'withFlats': 'd',
-    'withSharps': 'd'
-  },
-  {
-    'withFlats': 'e',
-    'withSharps': 'e'
-  },
-  {
-    'withFlats': 'f',
-    'withSharps': 'f'
-  },
-  {
-    'withFlats': 'g',
-    'withSharps': 'g'
-  },
-  {
-    'withFlats': 'a',
-    'withSharps': 'a'
-  },
-  {
-    'withFlats': 'b',
-    'withSharps': 'b'
-  }
-];
-
 describe('testing reducers', () => {
   it('neckState reducer passes through unknown action', () => {
     expect(reducer.neckState(undefined, {
@@ -48,8 +17,7 @@ describe('testing reducers', () => {
       neckFlavor: 'withSharps',
       noteSet: DEFAULT_NOTE_SET,
       scaleStart: 'c',
-      scaleName: 'major',
-      scaleNotes
+      scaleName: 'major'
     });
   });
   it('neckState sets notes appropriately', () => {
@@ -61,8 +29,7 @@ describe('testing reducers', () => {
       neckFlavor: 'withSharps',
       noteSet: DEFAULT_NOTE_SET,
       scaleStart: 'c',
-      scaleName: 'major',
-      scaleNotes
+      scaleName: 'major'
     });
     expect(reducer.neckState(undefined, {
       type: 'MAKE_NECK',
@@ -72,8 +39,7 @@ describe('testing reducers', () => {
       neckFlavor: 'withSharps',
       noteSet: DEFAULT_NOTE_SET,
       scaleStart: 'c',
-      scaleName: 'major',
-      scaleNotes
+      scaleName: 'major'
     });
     expect(reducer.neckState(undefined, {
       type: 'MAKE_NECK',
@@ -83,8 +49,7 @@ describe('testing reducers', () => {
       neckFlavor: 'withSharps',
       noteSet: DEFAULT_NOTE_SET,
       scaleName: 'major',
-      scaleStart: 'c',
-      scaleNotes
+      scaleStart: 'c'
     });
   });
   it('neckState sets and increments existing state', () => {
@@ -106,8 +71,7 @@ describe('testing reducers', () => {
       neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'],
       noteSet: DEFAULT_NOTE_SET,
       scaleName: 'major',
-      scaleStart: 'c',
-      scaleNotes
+      scaleStart: 'c'
     });
   });
   it('neckState sets and updates neck flavor appropriately', () => {
@@ -119,8 +83,7 @@ describe('testing reducers', () => {
       neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'],
       noteSet: DEFAULT_NOTE_SET,
       scaleName: 'major',
-      scaleStart: 'c',
-      scaleNotes
+      scaleStart: 'c'
     });
   });
   it('neckState sets and updates neck flavor appropriately', () => {
