@@ -18,9 +18,8 @@ const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}
   var scaleNotes = methods.makeScaleFromRootAndIntervals(scaleStart, SCALE_SET[scaleName], noteSet);
 
   let neck = methods.neckMaker(neckNotes, noteSet);
-  let strings = neck.map((str) => str.stringNotes);
-  let testStrings = strings.map((str, i) => {
-    return <StringView key={i} string={methods.revealNotes(str, neckFlavor)} scaleNotes={scaleNotes} />;
+  let testStrings = neck.map((str, i) => {
+    return <StringView key={i} string={methods.revealNotes(str.stringNotes, neckFlavor)} scaleNotes={scaleNotes} />;
   });
 
   let StringAdjusters = neckNotes.map((string, i) => <StringAdjuster actions={actions} dispatch={dispatch} key={i} stringNumber={i} />);
@@ -28,14 +27,18 @@ const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}
   return (
 
     <div className={'mainContainer'}>
-      <ScaleStartChooser actions={actions} dispatch={dispatch} scaleName={scaleName} scaleStart={scaleStart}  neckFlavor={neckFlavor} />
       <ScaleChooser actions={actions} dispatch={dispatch} scaleName={scaleName}/>
+      <ScaleStartChooser actions={actions} dispatch={dispatch} scaleName={scaleName} scaleStart={scaleStart}  neckFlavor={neckFlavor} />
       <TuningChooser actions={actions} dispatch={dispatch} neckNotes={neckNotes}/>
       <TuningAdjuster actions={actions} dispatch={dispatch} />
+
       {StringAdjusters}
+
       <Button onClick={() => dispatch(actions.makeNeck(['d', 'a', 'd', 'g', 'a', 'd']))}>DADGAD</Button>
       <Button onClick={() => dispatch(actions.makeNeck(['c', 'a', 'd', 'g', 'a', 'd']))}>CADGAD</Button>
       <Button onClick={() => dispatch(actions.makeNeck(['e', 'a', 'd', 'g', 'b', 'e']))}>Standard Tuning</Button>
+      <br/>
+      
       <Button onClick={() => dispatch(actions.setFlavor('b'))}>Flat</Button>
       <Button onClick={() => dispatch(actions.setFlavor('#'))}>Sharp</Button>
 

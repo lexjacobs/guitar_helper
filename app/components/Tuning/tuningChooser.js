@@ -63,7 +63,7 @@ export const TuningChooser = function(props){
     <div>
       <form>
         <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Select Tuning</ControlLabel>
+          <ControlLabel>Select Neck Tuning</ControlLabel>
           <FormControl value={scaleNameFromNotes(props.neckNotes, SCALE_MAPPING)} componentClass="select" placeholder="select" onChange={ (event) => {
             props.dispatch(props.actions.makeNeck(SCALE_MAPPING[event.target.value]));
           }}>

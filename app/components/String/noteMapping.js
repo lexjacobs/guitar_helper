@@ -40,6 +40,29 @@ export const DEFAULT_NOTE_SET = [{
   withFlats: 'ab'
 }];
 
+export const DEFAULT_SCALE_NOTES = [{
+  withSharps: 'c',
+  withFlats: 'c'
+}, {
+  withSharps: 'd',
+  withFlats: 'd'
+}, {
+  withSharps: 'e',
+  withFlats: 'e'
+}, {
+  withSharps: 'f',
+  withFlats: 'f'
+}, {
+  withSharps: 'g',
+  withFlats: 'g'
+}, {
+  withSharps: 'a',
+  withFlats: 'a'
+}, {
+  withSharps: 'b',
+  withFlats: 'b'
+}];
+
 const SCALES = {
   standard: 'e,a,d,g,b,e',
   'drop d': 'd,a,d,g,b,e',

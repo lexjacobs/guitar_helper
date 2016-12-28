@@ -7,7 +7,7 @@ export const StringView = function(props){
   var strings = props.string.map((note, i) => {
 
     if (noteInSet(note, props.scaleNotes)) {
-      return (<span style={{fontSize: 'large'}} key={i}>{' '}{note}{' '}</span>);
+      return (<span style={{fontSize: 'large', color: 'red'}} key={i}>{' '}{note}{' '}</span>);
     } else {
       return (<span key={i}>{' '}{note}{' '}</span>);
     }

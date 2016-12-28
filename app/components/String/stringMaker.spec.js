@@ -217,6 +217,19 @@ describe('a string contains the expected properties', () => {
     expect(methods.noteInSet('a#', [{something: 'ichabod', somethingElse: 'crane'}])).to.be.false;
     expect(methods.noteInSet('ichabod crane', [{something: 'a', somethingElse: 'a#'}])).to.be.false;
   });
+  it('can format a note in the current flavor', () => {
+    expect(methods.formatNoteAsCurrentFlavor('a#', 'withFlats', DEFAULT_NOTE_SET)).to.equal('bb');
+    expect(methods.formatNoteAsCurrentFlavor('a#', 'withSharps', DEFAULT_NOTE_SET)).to.equal('a#');
+    expect(methods.formatNoteAsCurrentFlavor('g', 'withSharps', DEFAULT_NOTE_SET)).to.equal('g');
+    expect(methods.formatNoteAsCurrentFlavor('g', 'withFlats', DEFAULT_NOTE_SET)).to.equal('g');
+    expect(methods.formatNoteAsCurrentFlavor('gb', 'withSharps', DEFAULT_NOTE_SET)).to.equal('f#');
+  });
+  it('can format a note in the current flavor', () => {
+    expect(methods.getFullNoteFromNote('db', DEFAULT_NOTE_SET)).to.deep.equal({withFlats: 'db', withSharps: 'c#'});
+    expect(methods.getFullNoteFromNote('c#', DEFAULT_NOTE_SET)).to.deep.equal({withFlats: 'db', withSharps: 'c#'});
+    expect(methods.getFullNoteFromNote('c', DEFAULT_NOTE_SET)).to.deep.equal({withFlats: 'c', withSharps: 'c'});
+    expect(methods.getFullNoteFromNote('Barry Manilow', DEFAULT_NOTE_SET)).to.be.undefined;
+  });
 });
 describe('scales can be constructed from starting parameters', () => {
   it('makes a scale from or root note, intervals, and a note set', () => {

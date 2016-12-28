@@ -2,6 +2,7 @@
 var React = require('react');
 import {Button} from 'react-bootstrap';
 
+// adjust single string, includes parameter of string number
 export const StringAdjuster = function(props){
   return (
     <div>
@@ -11,6 +12,7 @@ export const StringAdjuster = function(props){
   );
 };
 
+// adjust entire neck, second parameter undefined
 export const TuningAdjuster = function(props){
   return (
     <div>

@@ -1,19 +1,23 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "DEFAULT" }]*/
 
-import {
-  DEFAULT_NOTE_SET
-} from './noteMapping.js';
+import {DEFAULT_NOTE_SET} from './noteMapping.js';
+
+export function formatNoteAsCurrentFlavor(note, flavor, noteSet) {
+  return getFullNoteFromNote(note, noteSet)[flavor];
+}
+
+export function getFullNoteFromNote(note, noteSet) {
+  return getNoteFromNumber(getNumberFromNote(note, noteSet), noteSet);
+}
 
 export function getNoteFromNumber(num, noteSet) {
   return noteSet[num];
 }
 
 export function getNumberFromNote(note, noteSet) {
-
   if (typeof note === 'object') {
     note = note.withSharps;
   }
-
   for (var i = 0; i < noteSet.length; i++) {
     for (var flavor in noteSet[i]) {
       if (noteSet[i][flavor] === note) {
@@ -38,6 +42,15 @@ export function makeScaleFromRootAndIntervals(root='c', intervals=[1], noteSet=D
   }, start);
 }
 
+export function makeStringFromLetter(firstNote, noteSet) {
+  var result = [];
+  firstNote = getNumberFromNote(firstNote, noteSet);
+  for (var i = 0; i < noteSet.length; i++) {
+    result.push(noteSet[(i + firstNote) % noteSet.length]);
+  }
+  return result;
+}
+
 export function makeStringFromNumber(firstNote, noteSet) {
   var result = [];
   for (var i = 0; i < noteSet.length; i++) {
@@ -46,13 +59,8 @@ export function makeStringFromNumber(firstNote, noteSet) {
   return result;
 }
 
-export function makeStringFromLetter(firstNote, noteSet) {
-  var result = [];
-  firstNote = getNumberFromNote(firstNote, noteSet);
-  for (var i = 0; i < noteSet.length; i++) {
-    result.push(noteSet[(i + firstNote) % noteSet.length]);
-  }
-  return result;
+export function neckMaker(startNotes, noteSet=DEFAULT_NOTE_SET) {
+  return startNotes.map((note) => stringMaker({stringStart: note}, noteSet));
 }
 
 export function noteInSet(note, set) {
@@ -83,10 +91,6 @@ export function stringMaker(options = {}, noteSet) {
   return {
     stringNotes
   };
-}
-
-export function neckMaker(startNotes, noteSet=DEFAULT_NOTE_SET) {
-  return startNotes.map((note) => stringMaker({stringStart: note}, noteSet));
 }
 
 /*
