@@ -21,19 +21,19 @@ const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}
       <ScaleStartChooser actions={actions} dispatch={dispatch} scaleName={scaleName} scaleStart={scaleStart}  neckFlavor={neckFlavor} />
       <TuningChooser actions={actions} dispatch={dispatch} neckNotes={neckNotes}/>
       <NeckTuningAdjuster actions={actions} dispatch={dispatch} />
+      <br/>
 
+      <StringAndTuner scaleStart={scaleStart} scaleSet={SCALE_SET} noteSet={noteSet} scaleName={scaleName} neckNotes={neckNotes} neckFlavor={neckFlavor} actions={actions} dispatch={dispatch} />
+
+
+      <br/>
+      <Button onClick={() => dispatch(actions.setFlavor('b'))}>Flat</Button>
+      <Button onClick={() => dispatch(actions.setFlavor('#'))}>Sharp</Button>
+      <br/>
       <Button onClick={() => dispatch(actions.makeNeck(['d', 'a', 'd', 'g', 'a', 'd']))}>DADGAD</Button>
       <Button onClick={() => dispatch(actions.makeNeck(['c', 'a', 'd', 'g', 'a', 'd']))}>CADGAD</Button>
       <Button onClick={() => dispatch(actions.makeNeck(['e', 'a', 'd', 'g', 'b', 'e']))}>Standard Tuning</Button>
-      <br/>
 
-      <Button onClick={() => dispatch(actions.setFlavor('b'))}>Flat</Button>
-      <Button onClick={() => dispatch(actions.setFlavor('#'))}>Sharp</Button>
-
-      <div className={'currentCount'}>Current neckNotes: {neckNotes}
-      </div>
-
-      <StringAndTuner scaleStart={scaleStart} scaleSet={SCALE_SET} noteSet={noteSet} scaleName={scaleName} neckNotes={neckNotes} neckFlavor={neckFlavor} actions={actions} dispatch={dispatch} />
 
     </div>
   );
