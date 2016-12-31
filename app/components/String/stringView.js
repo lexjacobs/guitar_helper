@@ -11,8 +11,11 @@ export const Letter = function(props) {
 
 export const StringNoteBox = function(props) {
   var letter = <Letter highlight={props.inScale ? true : false} letter={props.letter} />;
+
+  // first note needs a distinct marker for open string
+  var nutStyle = props.noteNumber === 0 ? 'nut-row' : 'standard';
   return(
-    <span className="standard">
+    <span className={props.stringNumber === 0 ? 'top-edge' : nutStyle}>
       {letter}
     </span>
   );
@@ -23,16 +26,16 @@ export const StringView = function(props) {
   var string = props.string.map((note, i) => {
 
     if (noteInSet(note, props.scaleNotes)) {
-      return <StringNoteBox key={i} inScale={true} letter={note} />;
+      // for fret notes in scale
+      return <StringNoteBox stringNumber={props.stringNumber} key={i} inScale={true} noteNumber={i} letter={note} />;
     } else {
-      return (<StringNoteBox key={i} letter={note} />);
+      // fret notes not in scale
+      return (<StringNoteBox stringNumber={props.stringNumber} key={i} noteNumber={i} letter={note} />);
     }
   });
 
-  return (<span className="string-row">{string}</span>);
+  return (<span className='string-row'>{string}</span>);
 };
-
-var style={ height: 32 };
 
 export const StringAndTuner = function(props) {
   var scaleNotes = methods.makeScaleFromRootAndIntervals(props.scaleStart, props.scaleSet[props.scaleName], props.noteSet);
@@ -43,7 +46,7 @@ export const StringAndTuner = function(props) {
 
   var stringSet = reverseNeck.map((str, i) => {
     return (
-      <div style={style} key={i}>
+      <div style={{ height: 32 }} key={i}>
         <StringAdjuster actions={props.actions} dispatch={props.dispatch} stringNumber={i} neckNotes={reverseNeck} />
         <StringView string={methods.revealNotes(str.stringNotes, props.neckFlavor)} stringNumber={i} scaleNotes={scaleNotes} />
       </div>

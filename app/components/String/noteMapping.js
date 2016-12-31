@@ -41,6 +41,7 @@ export const DEFAULT_NOTE_SET = [{
 }];
 
 const SCALES = {
+  'custom': '',
   standard: 'e,a,d,g,b,e',
   'drop d': 'd,a,d,g,b,e',
   dadgad: 'd,a,d,g,a,d',
@@ -59,7 +60,6 @@ const SCALES = {
   'open g': 'd,g,d,g,b,d',
   ostrich: 'e,e,e,e,e,e',
   '7 string': 'b,e,a,d,g,b,e',
-  'custom': ''
 };
 
 export function scaleTransform(scales){
@@ -112,5 +112,6 @@ export function scaleNameFromNotes (notes, mapping) {
 export const SCALE_SET = {
   major: [2, 2, 1, 2, 2, 2],
   minor: [2, 1, 2, 2, 1, 2],
-  'whole tone': [2, 2, 2, 2, 2]
+  'whole tone': [2, 2, 2, 2, 2],
+  'chromatic scale': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 };
