@@ -90,7 +90,7 @@ describe('a string contains the expected properties', () => {
 
       // checks each note within scale
       for (var j = 0; j < testString.stringNotes.length; j++) {
-        expect(methods.getNumberFromNote(testString.stringNotes[j].withSharps, testString.stringNotes)).to.equal(j);
+        expect(methods.getNumberFromNote(testString.stringNotes[j].withSharps, testString.stringNotes)).to.equal(j % 12);
       }
 
     }

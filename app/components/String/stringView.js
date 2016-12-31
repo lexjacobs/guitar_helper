@@ -3,20 +3,36 @@ var React = require('react');
 import {noteInSet} from './stringMaker.js';
 import * as methods from './stringMaker.js';
 import {StringAdjuster} from '../Tuning/tuningAdjuster.js';
+require('./stringViewCss.scss');
+
+export const Letter = function(props) {
+  return <span className={props.highlight ? 'letter' : 'letter-off'}>{props.letter.toUpperCase()}</span>;
+};
+
+export const StringNoteBox = function(props) {
+  var letter = <Letter highlight={props.inScale ? true : false} letter={props.letter} />;
+  return(
+    <span className="standard">
+      {letter}
+    </span>
+  );
+};
 
 export const StringView = function(props) {
 
-  var strings = props.string.map((note, i) => {
+  var string = props.string.map((note, i) => {
 
     if (noteInSet(note, props.scaleNotes)) {
-      return (<span style={{fontSize: 20, fontFamily: 'monospace', color: 'red'}} key={i}>{' '}{note}{' '}</span>);
+      return <StringNoteBox key={i} inScale={true} letter={note} />;
     } else {
-      return (<span style={{fontSize: 20, fontFamily: 'monospace'}} key={i}>{' '}{note}{' '}</span>);
+      return (<StringNoteBox key={i} letter={note} />);
     }
   });
 
-  return (<span>{strings}</span>);
+  return (<span className="string-row">{string}</span>);
 };
+
+var style={ height: 32 };
 
 export const StringAndTuner = function(props) {
   var scaleNotes = methods.makeScaleFromRootAndIntervals(props.scaleStart, props.scaleSet[props.scaleName], props.noteSet);
@@ -27,9 +43,9 @@ export const StringAndTuner = function(props) {
 
   var stringSet = reverseNeck.map((str, i) => {
     return (
-      <div key={i}>
+      <div style={style} key={i}>
         <StringAdjuster actions={props.actions} dispatch={props.dispatch} stringNumber={i} neckNotes={reverseNeck} />
-        <StringView string={methods.revealNotes(str.stringNotes, props.neckFlavor)} scaleNotes={scaleNotes} />
+        <StringView string={methods.revealNotes(str.stringNotes, props.neckFlavor)} stringNumber={i} scaleNotes={scaleNotes} />
       </div>
     );
   });

@@ -10,7 +10,7 @@ export const StringAdjuster = function(props){
   // need to correspond to original array positions
   var adjustedString = (props.neckNotes.length - props.stringNumber - 1);
 
-  var style={'width': 50};
+  var style={width: 50, height: 30, lineHeight: 1};
 
   return (
     <span>

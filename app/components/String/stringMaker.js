@@ -45,7 +45,7 @@ export function makeScaleFromRootAndIntervals(root='c', intervals=[1], noteSet=D
 export function makeStringFromLetter(firstNote, noteSet) {
   var result = [];
   firstNote = getNumberFromNote(firstNote, noteSet);
-  for (var i = 0; i < noteSet.length; i++) {
+  for (var i = 0; i <= noteSet.length; i++) {
     result.push(noteSet[(i + firstNote) % noteSet.length]);
   }
   return result;
@@ -53,7 +53,7 @@ export function makeStringFromLetter(firstNote, noteSet) {
 
 export function makeStringFromNumber(firstNote, noteSet) {
   var result = [];
-  for (var i = 0; i < noteSet.length; i++) {
+  for (var i = 0; i <= noteSet.length; i++) {
     result.push(noteSet[(i + firstNote) % noteSet.length]);
   }
   return result;
