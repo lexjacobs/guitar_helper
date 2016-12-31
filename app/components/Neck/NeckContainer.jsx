@@ -27,6 +27,7 @@ const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}
 
 
       <br/>
+      <br/>
       <Button onClick={() => dispatch(actions.setFlavor('b'))}>Flat</Button>
       <Button onClick={() => dispatch(actions.setFlavor('#'))}>Sharp</Button>
       <br/>

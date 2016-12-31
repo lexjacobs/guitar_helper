@@ -6,16 +6,37 @@ import {StringAdjuster} from '../Tuning/tuningAdjuster.js';
 require('./stringViewCss.scss');
 
 export const Letter = function(props) {
-  return <span className={props.highlight ? 'letter' : 'letter-off'}>{props.letter.toUpperCase()}</span>;
+
+  var fretNumber = <span className={'fret-number'}>{props.noteNumber}</span>;
+
+  return (
+    <span>
+      <span className={props.highlight ? 'letter' : 'letter-off'}>{props.letter.toUpperCase()}</span>
+      {props.finalNote ? fretNumber : null}
+    </span>);
 };
 
 export const StringNoteBox = function(props) {
-  var letter = <Letter highlight={props.inScale ? true : false} letter={props.letter} />;
+  var letter = <Letter noteNumber={props.noteNumber} finalNote={props.finalNote} highlight={props.inScale} letter={props.letter} stringNumber={props.stringNumber} />;
+
+  var nutStyle, edgeStyle;
 
   // first note needs a distinct marker for open string
-  var nutStyle = props.noteNumber === 0 ? 'nut-row' : 'standard';
+  if (props.noteNumber === 0) {
+    nutStyle = 'nut-row';
+  } else {
+    nutStyle = 'standard';
+  }
+
+  // first row needs a distinct style
+  if (props.stringNumber === 0) {
+    edgeStyle = 'top-edge';
+  } else {
+    edgeStyle = nutStyle;
+  }
+
   return(
-    <span className={props.stringNumber === 0 ? 'top-edge' : nutStyle}>
+    <span className={edgeStyle}>
       {letter}
     </span>
   );
@@ -25,13 +46,11 @@ export const StringView = function(props) {
 
   var string = props.string.map((note, i) => {
 
-    if (noteInSet(note, props.scaleNotes)) {
-      // for fret notes in scale
-      return <StringNoteBox stringNumber={props.stringNumber} key={i} inScale={true} noteNumber={i} letter={note} />;
-    } else {
-      // fret notes not in scale
-      return (<StringNoteBox stringNumber={props.stringNumber} key={i} noteNumber={i} letter={note} />);
-    }
+    // to determine fret notes in scale
+    var noteInScale = noteInSet(note, props.scaleNotes);
+
+    return <StringNoteBox stringNumber={props.stringNumber} finalNote={props.finalNote} key={i} inScale={noteInScale ? true : false} noteNumber={i} letter={note} />;
+
   });
 
   return (<span className='string-row'>{string}</span>);
@@ -44,14 +63,14 @@ export const StringAndTuner = function(props) {
 
   var reverseNeck = neck.slice().reverse();
 
-  var stringSet = reverseNeck.map((str, i) => {
+  var StringAndTunerSet = reverseNeck.map((str, i) => {
     return (
       <div style={{ height: 32 }} key={i}>
         <StringAdjuster actions={props.actions} dispatch={props.dispatch} stringNumber={i} neckNotes={reverseNeck} />
-        <StringView string={methods.revealNotes(str.stringNotes, props.neckFlavor)} stringNumber={i} scaleNotes={scaleNotes} />
+        <StringView finalNote={i === (reverseNeck.length - 1)} string={methods.revealNotes(str.stringNotes, props.neckFlavor)} stringNumber={i} scaleNotes={scaleNotes} />
       </div>
     );
   });
-  return <div>{stringSet}</div>;
+  return <div>{StringAndTunerSet}</div>;
 
 };
