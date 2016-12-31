@@ -30,6 +30,28 @@ export function neckState(state = {neckNotes: ['e', 'a', 'd', 'g', 'b', 'e'], ne
       })
     };
 
+  case 'ADD_STRING':
+
+    var adjustedNeckNotes = state.neckNotes.slice();
+    adjustedNeckNotes.push('a');
+
+    return {
+      ...state,
+      neckNotes: adjustedNeckNotes
+    };
+
+  case 'DELETE_STRING':
+
+    var trimmedNeckNotes = state.neckNotes.slice();
+    trimmedNeckNotes = trimmedNeckNotes.filter((note, i) => {
+      return i !== action.stringNumber;
+    });
+
+    return {
+      ...state,
+      neckNotes: trimmedNeckNotes
+    };
+
   case 'MAKE_NECK':
 
     return {

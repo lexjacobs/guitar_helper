@@ -9,6 +9,24 @@ import * as reducer from './reducers.js';
 import {DEFAULT_NOTE_SET} from '../components/String/noteMapping.js';
 
 describe('testing reducers', () => {
+  it('adds a string successfully', () => {
+    expect(reducer.neckState({neckNotes: ['e']}, {type: 'ADD_STRING'})).to.deep.equal({neckNotes: ['e', 'a']});
+    expect(reducer.neckState({neckNotes: []}, {type: 'ADD_STRING'})).to.deep.equal({neckNotes: ['a']});
+    var longTest = [];
+    for (var i = 0; i < 100; i++) {
+      longTest.push('marlon brando');
+    }
+    expect(reducer.neckState({neckNotes: longTest}, {type: 'ADD_STRING'})['neckNotes'][100]).to.equal('a');
+  });
+  it('deletes a solo string successfully', () => {
+    expect(reducer.neckState({neckNotes: ['e']}, {type: 'DELETE_STRING', stringNumber: 0})).to.deep.equal({neckNotes: []});
+  });
+  it('deletes a target string successfully', () => {
+    expect(reducer.neckState({neckNotes: ['e', 'a', 'd']}, {type: 'DELETE_STRING', stringNumber: 0})).to.deep.equal({neckNotes: ['a', 'd']});
+  });
+  it('deletes a string and handles missing index', () => {
+    expect(reducer.neckState({neckNotes: ['e']}, {type: 'DELETE_STRING', stringNumber: 300502}).doesNotThrow);
+  });
   it('neckState reducer passes through unknown action', () => {
     expect(reducer.neckState(undefined, {
       type: ''

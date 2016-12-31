@@ -20,6 +20,17 @@ describe('testing action creators', () => {
 
   });
 
+  it('returns the parameters for addString properly', () => {
+    expect(actions.addString()).to.deep.equal({type: 'ADD_STRING'});
+  });
+
+  it('returns the parameters for deleteString properly', () => {
+    let testStringRange = [0, 1, 2, 3, 99];
+    testStringRange.forEach((testNumber) => {
+      expect(actions.deleteString(testNumber)).to.deep.equal({type: 'DELETE_STRING', stringNumber: testNumber});
+    });
+  });
+
   it('returns the parameters for makeNeck properly', () => {
     let testNotes = [0, 1, 2];
     expect(actions.makeNeck(testNotes)).to.deep.equal({type: 'MAKE_NECK', notes: testNotes});

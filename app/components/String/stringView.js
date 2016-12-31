@@ -9,9 +9,12 @@ export const Letter = function(props) {
 
   var fretNumber = <span className={'fret-number'}>{props.noteNumber}</span>;
 
+  // only capitalize first character so as to render 'Bb', not 'BB'
+  var finalLetterDisplay = props.letter.split('').map((letter, i) => (i === 0 ? letter.toUpperCase() : letter));
+
   return (
     <span>
-      <span className={props.highlight ? 'letter' : 'letter-off'}>{props.letter.toUpperCase()}</span>
+      <span className={props.highlight ? 'letter' : 'letter-off'}>{finalLetterDisplay}</span>
       {props.finalNote ? fretNumber : null}
     </span>);
 };

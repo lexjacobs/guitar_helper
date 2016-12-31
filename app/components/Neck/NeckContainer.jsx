@@ -28,13 +28,11 @@ const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}
 
       <br/>
       <br/>
-      <Button onClick={() => dispatch(actions.setFlavor('b'))}>Flat</Button>
-      <Button onClick={() => dispatch(actions.setFlavor('#'))}>Sharp</Button>
+      <Button onClick={() => dispatch(actions.setFlavor('b'))}>Display Flats</Button>{' '}
+      <Button onClick={() => dispatch(actions.setFlavor('#'))}>Display Sharps</Button>
       <br/>
-      <Button onClick={() => dispatch(actions.makeNeck(['d', 'a', 'd', 'g', 'a', 'd']))}>DADGAD</Button>
-      <Button onClick={() => dispatch(actions.makeNeck(['c', 'a', 'd', 'g', 'a', 'd']))}>CADGAD</Button>
-      <Button onClick={() => dispatch(actions.makeNeck(['e', 'a', 'd', 'g', 'b', 'e']))}>Standard Tuning</Button>
 
+      {/* <Button onClick={() => dispatch(actions.makeNeck(['d', 'a', 'd', 'g', 'a', 'd']))}>DADGAD</Button> */}
 
     </div>
   );
