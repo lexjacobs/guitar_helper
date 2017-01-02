@@ -3,21 +3,20 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackStripLoader = require('strip-loader');
 
-const TARGET = process.env.npm_lifecycle_event;
+const TARGET = process.env.NODE_ENV;
 console.log('target event is ' + TARGET);
 
 var common = {
   cache: true,
   debug: true,
-  entry: {
-    bundle: './app/index.js'
-  },
+  // entry specified below, specific to production | development
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   output: {
     filename: './[name].js',
-    path: __dirname + '/dist'
+    path: __dirname + '/dist/',
+    publicPath: './'
   },
   module: {
     loaders: [{
@@ -49,7 +48,8 @@ var common = {
       exclude: /node_modules/,
       include: __dirname
     }]
-  }
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };
 
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -58,11 +58,7 @@ var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 
-/*
-TARGET NAMES must correspond to 'npm run' task names in package.json
-*/
-
-if (TARGET === 'start' || !TARGET) {
+if (TARGET !== 'production' || !TARGET) {
 
   module.exports = Object.assign(common, {
     devtool: 'cheap-module-eval-source-map',
@@ -71,6 +67,16 @@ if (TARGET === 'start' || !TARGET) {
       contentBase: './dist',
       hot: true
     },
+    entry: [
+
+      // for hot style updates
+      'webpack/hot/dev-server',
+      // refreshing the browser on hot updates
+      'webpack-dev-server/client?http://localhost:8080',
+      // our application
+      // mainPath
+      './app/index.js',
+    ],
     plugins: [new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
@@ -81,7 +87,7 @@ if (TARGET === 'start' || !TARGET) {
   });
 }
 
-if (TARGET === 'build') {
+if (TARGET === 'production') {
 
   var stripLoader = {
     test: [/\.jsx?$/],
@@ -91,6 +97,9 @@ if (TARGET === 'build') {
   common.module.loaders.push(stripLoader);
 
   module.exports = Object.assign(common, {
+    entry: [
+      './app/index.js',
+    ],
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {

@@ -1,4 +1,4 @@
-/* global require module */
+/* global require process module */
 import React, {PropTypes as T} from 'react';
 var FontAwesome = require('react-fontawesome');
 import NavLink from './NavLink';
@@ -18,6 +18,7 @@ var NavBar = React.createClass({
           <li>
             <NavLink className="nav-link" to="/main">Main</NavLink>
           </li>
+          {process.env.NODE_ENV === 'development' ? <li><NavLink className="nav-link" to="/main">{process.env.NODE_ENV} version</NavLink></li> : null}
         </ul>
       </nav>
 

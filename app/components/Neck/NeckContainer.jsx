@@ -32,8 +32,6 @@ const _Neck = ({dispatch, neckNotes, neckFlavor, noteSet, scaleName, scaleStart}
       <Button onClick={() => dispatch(actions.setFlavor('#'))}>Display Sharps</Button>
       <br/>
 
-      {/* <Button onClick={() => dispatch(actions.makeNeck(['d', 'a', 'd', 'g', 'a', 'd']))}>DADGAD</Button> */}
-
     </div>
   );
 };
