@@ -18,7 +18,7 @@ var NavBar = React.createClass({
           <li>
             <NavLink className="nav-link" to="/main">Main</NavLink>
           </li>
-          {process.env.NODE_ENV === 'development' ? <li><NavLink className="nav-link" to="/main">{process.env.NODE_ENV} version</NavLink></li> : null}
+          {process.env.NODE_ENV === 'development' ? <li><NavLink className="nav-link" to="/main">{process.env.NODE_ENV} version</NavLink> </li> : null}
         </ul>
       </nav>
 
