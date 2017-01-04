@@ -38,8 +38,8 @@ export const routes = (
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={NavBar}>
-        <IndexRedirect to="/main"/>
-        <Route path="/main" component={Neck}/>
+        <IndexRedirect to="/scaleDisplay"/>
+        <Route path="/scaleDisplay" component={Neck}/>
       </Route>
     </Router>
   </Provider>

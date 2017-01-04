@@ -13,12 +13,12 @@ var NavBar = React.createClass({
       <nav className="top-bar">
         <ul>
           <li>
-            <NavLink className="nav-link" to="/main"><FontAwesome className="logo-adjust" name='home' size='2x' /></NavLink>
+            <NavLink className="nav-link" to="/scaleDisplay"><FontAwesome className="logo-adjust" name='home' size='2x' /></NavLink>
           </li>
           <li>
-            <NavLink className="nav-link" to="/main">Main</NavLink>
+            <NavLink className="nav-link" to="/scaleDisplay">Scale Display</NavLink>
           </li>
-          {process.env.NODE_ENV === 'development' ? <li><NavLink className="nav-link" to="/main">{process.env.NODE_ENV} version</NavLink> </li> : null}
+          {process.env.NODE_ENV === 'development' ? <li><NavLink className="nav-link" to="/scaleDisplay">{process.env.NODE_ENV} version</NavLink> </li> : null}
         </ul>
       </nav>
 
