@@ -1,14 +1,11 @@
 // console.log(displayDiff('hel1thankyou2', 'helthankyou3'));
 // console.log(displayDiff('same_prefix_1233_same_suffix', 'same_prefix23123_same_suffix'));
-console.log(displayDiff('sameprefix123', 'sameprefix23123'));
-function displayDiff(oldVersion, newVersion) {
+export function displayDiff(oldVersion, newVersion) {
   var result = solutionTree(oldVersion, newVersion).walkTree();
-  console.log('resutl', result);
-  console.log('result tree', solutionTree(oldVersion, newVersion));
   return constructString(result);
 }
 
-function solutionTree(original, updated, trunk) {
+export function solutionTree(original, updated, trunk) {
   var result;
   trunk = trunk || 0; //different handling for first node
   var topNode = longestCommon(original, updated)[0];
@@ -51,7 +48,7 @@ function solutionTree(original, updated, trunk) {
   return result;
 }
 
-function treeMaker(value) {
+export function treeMaker(value) {
   this.value = value;
   this.addLeft = function(value) {
     this.left = new treeMaker(value);
@@ -78,7 +75,7 @@ function treeMaker(value) {
   };
 }
 
-function splicePiece(str, seg) {
+export function splicePiece(str, seg) {
   var len = seg.length;
   var start = str.indexOf(seg);
   return {
@@ -88,7 +85,7 @@ function splicePiece(str, seg) {
   };
 }
 
-function constructString(arr) {
+export function constructString(arr) {
   var result = '';
   arr.forEach(function(segment) {
     console.log('segments', segment.original, segment.updated);
@@ -104,7 +101,7 @@ function constructString(arr) {
   return result;
 }
 
-function longestCommon(s1, s2) {
+export function longestCommon(s1, s2) {
   var len1 = s1.length,
     len2 = s2.length,
     matrix = [],
