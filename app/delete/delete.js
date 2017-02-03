@@ -88,7 +88,6 @@ export function splicePiece(str, seg) {
 export function constructString(arr) {
   var result = '';
   arr.forEach(function(segment) {
-    console.log('segments', segment.original, segment.updated);
     if (segment.original === segment.updated) result += segment.original;
     else if (segment.updated === '') result += '(' + segment.original + ')';
     else if (segment.original === '') result += '[' + segment.updated + ']';
