@@ -1,5 +1,7 @@
-// console.log(displayDiff('hel1thankyou2', 'helthankyou3'));
-// console.log(displayDiff('same_prefix_1233_same_suffix', 'same_prefix23123_same_suffix'));
+console.log(displayDiff('hel1thankyou2', 'helthankyou3'));
+// console.log(displayDiff('same_prefix_12533_same_suffix', 'same_prefix23123_same_suffix'));
+// console.log('result: same_prefix(_)[23]12(53)3_same_suffix'
+// );
 export function displayDiff(oldVersion, newVersion) {
   var result = solutionTree(oldVersion, newVersion).walkTree();
   return constructString(result);
@@ -59,15 +61,16 @@ export function treeMaker(value) {
   this.walkTree = function(result, depth) {
     depth = depth || 0;
     result = result || [];
-    if (depth !== 0 && (this.left === '' || this.left === undefined) && (this.right === '' || this.right === undefined)) {
-      result.push(this.value);
-    }
+
+    // if (depth !== 0 && (this.left === '' || this.left === undefined) && (this.right === '' || this.right === undefined)) {
+    //   result.push(this.value);
+    // }
     if (this.left !== undefined) {
       this.left.walkTree(result, depth + 1);
     }
-    if (depth === 0) {
-      result.push(this.value);
-    }
+    // if (depth === 0) {
+    result.push(this.value);
+    // }
     if (this.right !== undefined) {
       this.right.walkTree(result, depth + 1);
     }
