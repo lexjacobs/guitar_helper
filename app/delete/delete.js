@@ -1,52 +1,49 @@
-console.log(displayDiff('hel1thankyou2', 'helthankyou3'));
-// console.log(displayDiff('same_prefix_12533_same_suffix', 'same_prefix23123_same_suffix'));
-// console.log('result: same_prefix(_)[23]12(53)3_same_suffix'
-// );
+// result:          same_prefix(_)[23]12(3)3_same_suffix
+// expected result: same_prefix(_1)23[12]3_same_suffix
+
+// console.log(displayDiff('heyho', 'hiho'));
+console.log(displayDiff('same_prefix_12533_same_suffix', 'same_prefix23123_same_suffix'));
+console.log('expected result: same_prefix(_1)2(5)3[12]3_same_suffix');
+
+console.log(displayDiff('same_prefix_1233_same_suffix', 'same_prefix23123_same_suffix'));
+console.log('expected result: same_prefix(_1)23[12]3_same_suffix');
+
 export function displayDiff(oldVersion, newVersion) {
+  // var result = solutionTree(oldVersion, newVersion);
   var result = solutionTree(oldVersion, newVersion).walkTree();
-  return constructString(result);
+  console.log('intermediary result', result);
+  return result.join('');
+  // return constructString(result);
 }
 
-export function solutionTree(original, updated, trunk) {
-  var result;
-  trunk = trunk || 0; //different handling for first node
-  var topNode = longestCommon(original, updated)[0];
-  if (topNode === undefined) {
-    topNode = '';
-  }
-  var originalSplice = splicePiece(original, topNode);
-  var updatedSplice = splicePiece(updated, topNode);
+export function solutionTree(original, updated) {
+  console.log('longest commons: ', longestCommon(original, updated));
+  var commonArray = longestCommon(original, updated);
+  var result = new treeMaker({
+    original,
+    updated,
+    common: commonArray[commonArray.length - 1]
+  });
+  console.log('running value: ', result.value);
+  var originalSplice = splicePiece(original, result.value.common);
+  var updatedSplice = splicePiece(updated, result.value.common);
   var originalLeft = originalSplice.left;
   var updatedLeft = updatedSplice.left;
   var originalRight = originalSplice.right;
   var updatedRight = updatedSplice.right;
-  if (trunk === 0) {
-    result = new treeMaker({
-      original: topNode,
-      updated: topNode
-    });
-  } else {
-    result = new treeMaker({
-      original: original,
-      updated: updated
-    });
+
+  // console.log('originalSplice', originalSplice);
+  // console.log('updatedSplice', updatedSplice);
+  // console.log('originalLeft', originalLeft);
+  // console.log('updatedLeft', updatedLeft);
+  // console.log('originalRight', originalRight);
+  // console.log('updatedRight', updatedRight);
+
+  if (result.value.common) {
+    result.left = solutionTree(originalLeft, updatedLeft);
+    result.right = solutionTree(originalRight, updatedRight);
   }
-  if (longestCommon(originalLeft, updatedLeft).length === 0) {
-    result.addLeft({
-      original: originalLeft,
-      updated: updatedLeft
-    });
-  } else {
-    result.left = solutionTree(originalLeft, updatedLeft, trunk + 1);
-  }
-  if (longestCommon(originalRight, updatedRight).length === 0) {
-    result.addRight({
-      original: originalRight,
-      updated: updatedRight
-    });
-  } else {
-    result.right =  solutionTree(originalRight, updatedRight, trunk + 1);
-  }
+
   return result;
 }
 
@@ -69,7 +66,12 @@ export function treeMaker(value) {
       this.left.walkTree(result, depth + 1);
     }
     // if (depth === 0) {
-    result.push(this.value);
+    if (this.value.common === '') {
+      result.push(this.value.original.length ? ('(' + this.value.original + ')') : '');
+      result.push(this.value.updated.length ? ('[' + this.value.updated + ']') : '');
+
+    }
+    result.push(this.value.common);
     // }
     if (this.right !== undefined) {
       this.right.walkTree(result, depth + 1);
@@ -126,6 +128,6 @@ export function longestCommon(s1, s2) {
       } else matrix[i][j] = 0;
     }
   }
-
+  if (result.length === 0) result = [''];
   return result;
 }

@@ -21,6 +21,9 @@ describe('testing functions', () => {
     s1 = 'lemonbertrand';
     s2 = 'lemon';
     expect(actions.splicePiece(s1, s2)).to.deep.equal({segment: s2, left: '', right: 'bertrand'});
+    s1 = '';
+    s2 = '';
+    expect(actions.splicePiece(s1, s2)).to.deep.equal({segment: s2, left: '', right: ''});
     s1 = 'lemonbertrand';
     s2 = 'bertrand';
     expect(actions.splicePiece(s1, s2)).to.deep.equal({segment: s2, left: 'lemon', right: ''});
@@ -51,28 +54,28 @@ describe('testing functions', () => {
   });
   it('treeMaker', () => {
     expect(actions.treeMaker).to.be.a('function');
-    expect(actions.treeMaker(3)).to.be.a.object;
-    expect(new actions.treeMaker(3).value).to.equal(3);
-    expect(new actions.treeMaker(3)).to.be.an.instanceOf(actions.treeMaker);
-    expect(new actions.treeMaker(3)).to.have.property('value');
-    expect(new actions.treeMaker(3)).to.have.property('addLeft');
-    expect(new actions.treeMaker(3)).to.have.property('addRight');
-    expect(new actions.treeMaker(3)).to.have.property('walkTree');
-    expect(new actions.treeMaker(3).walkTree()).to.deep.equal([3]);
+    expect(actions.treeMaker({common: 3})).to.be.a.object;
+    expect(new actions.treeMaker({common: 3}).value).to.deep.equal({common: 3});
+    expect(new actions.treeMaker({common: 3})).to.be.an.instanceOf(actions.treeMaker);
+    expect(new actions.treeMaker({common: 3})).to.have.property('value');
+    expect(new actions.treeMaker({common: 3})).to.have.property('addLeft');
+    expect(new actions.treeMaker({common: 3})).to.have.property('addRight');
+    expect(new actions.treeMaker({common: 3})).to.have.property('walkTree');
+    expect(new actions.treeMaker({common: 3}).walkTree()).to.deep.equal([3]);
 
     /*
        1
     2     3
   4  5   6  7
      */
-    let tree = new actions.treeMaker(1);
-    tree.addLeft(2);
-    tree.addRight(3);
+    let tree = new actions.treeMaker({common: 1});
+    tree.addLeft({common: 2});
+    tree.addRight({common: 3});
     expect(tree.walkTree()).to.deep.equal([2, 1, 3]);
-    tree.left.addLeft(4);
-    tree.left.addRight(5);
-    tree.right.addLeft(6);
-    tree.right.addRight(7);
+    tree.left.addLeft({common: 4});
+    tree.left.addRight({common: 5});
+    tree.right.addLeft({common: 6});
+    tree.right.addRight({common: 7});
     expect(tree.walkTree()).to.deep.equal([4, 2, 5, 1, 6, 3, 7]);
 
 
@@ -82,16 +85,16 @@ describe('testing functions', () => {
   4    5    6  7
 8  9
 */
-    tree = new actions.treeMaker(1);
-    tree.addLeft(2);
-    tree.addRight(3);
+    tree = new actions.treeMaker({common: 1});
+    tree.addLeft({common: 2});
+    tree.addRight({common: 3});
     expect(tree.walkTree()).to.deep.equal([2, 1, 3]);
-    tree.left.addLeft(4);
-    tree.left.addRight(5);
-    tree.right.addLeft(6);
-    tree.right.addRight(7);
-    tree.left.left.addLeft(8);
-    tree.left.left.addRight(9);
+    tree.left.addLeft({common: 4});
+    tree.left.addRight({common: 5});
+    tree.right.addLeft({common: 6});
+    tree.right.addRight({common: 7});
+    tree.left.left.addLeft({common: 8});
+    tree.left.left.addRight({common: 9});
     expect(tree.walkTree()).to.deep.equal([8, 4, 9, 2, 5, 1, 6, 3, 7]);
 
   });
