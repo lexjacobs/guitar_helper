@@ -64,7 +64,7 @@
     "url-loader": "^0.5.7",
     "webpack-dev-server": "^1.16.2",
 
-    "axios": "^0.15.2",
+    "axios": "^0.19.2",
     "babel-preset-stage-2": "^6.18.0",
     "express": "^4.14.0",
     "lodash": "^4.17.4",
