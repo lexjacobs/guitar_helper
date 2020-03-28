@@ -25,7 +25,6 @@ export function getNumberFromNote(note, noteSet) {
       }
     }
   }
-  console.log('note not in scale: ', note);
   return null;
 }
 
